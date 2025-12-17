@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片字幕与水印生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片字幕与水印生成器</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- 左侧控制面板 -->
+            <aside class="control-panel">
+                <!-- 操作按钮 - 置顶 -->
+                <section class="action-section">
+                    <div class="button-group">
+                        <button id="generateBtn" class="btn btn-success">生成字幕图片</button>
+                        <button id="downloadBtn" class="btn btn-success" disabled>保存图片</button>
+                    </div>
+                </section>
+
+                <!-- 文件上传区 -->
+                <section class="upload-section">
+                    <h2>1. 上传图片</h2>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+                    <button id="uploadBtn" class="btn btn-primary">选择文件</button>
+                    <span id="fileName" class="file-name">未选择文件</span>
+                </section>
+
+                <!-- 字幕设置区 -->
+                <section class="subtitle-section">
+                    <h2>2. 字幕设置</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fontSize">字体大小 (px)</label>
+                            <input type="number" id="fontSize" value="100" min="50" max="200">
+                        </div>
+                        <div class="form-group">
+                            <label for="fontColor">字体颜色</label>
+                            <input type="color" id="fontColor" value="#ffffff">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="outlineColor">轮廓颜色</label>
+                        <input type="color" id="outlineColor" value="#000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="subtitleText">字幕内容</label>
+                        <textarea id="subtitleText" rows="4" placeholder="请输入字幕内容，每行对应一句话..."></textarea>
+                    </div>
+                </section>
+
+                <!-- 水印设置区 -->
+                <section class="watermark-section">
+                    <h2>3. 水印设置</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="watermarkEnabled">
+                            启用水印
+                        </label>
+                    </div>
+                    <div id="watermarkControls" style="display: none;">
+                        <div class="form-group">
+                            <label>水印类型</label>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="watermarkType" value="text" checked>
+                                    文字水印
+                                </label>
+                                <label>
+                                    <input type="radio" name="watermarkType" value="image">
+                                    图片水印
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="watermarkTextGroup">
+                            <label for="watermarkText">水印内容</label>
+                            <input type="text" id="watermarkText" placeholder="输入水印文字">
+                        </div>
+                        <div class="form-group" id="watermarkImageGroup" style="display: none;">
+                            <label for="watermarkImage">水印图片</label>
+                            <input type="file" id="watermarkImage" accept="image/png,image/jpeg">
+                        </div>
+                        <div class="form-group">
+                            <label for="watermarkSize">水印大小</label>
+                            <input type="range" id="watermarkSize" min="30" max="90" value="60">
+                            <span id="watermarkSizeValue">60</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="watermarkOpacity">透明度 (%)</label>
+                            <input type="range" id="watermarkOpacity" min="0" max="100" value="50">
+                            <span id="watermarkOpacityValue">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label>水印位置</label>
+                            <div class="position-grid">
+                                <button type="button" class="position-btn" data-position="top-left">左上</button>
+                                <button type="button" class="position-btn" data-position="top-center">居上</button>
+                                <button type="button" class="position-btn" data-position="top-right">右上</button>
+                                <button type="button" class="position-btn" data-position="middle-left">左中</button>
+                                <button type="button" class="position-btn" data-position="middle-center">居中</button>
+                                <button type="button" class="position-btn" data-position="middle-right">右中</button>
+                                <button type="button" class="position-btn" data-position="bottom-left">左下</button>
+                                <button type="button" class="position-btn" data-position="bottom-center">居下</button>
+                                <button type="button" class="position-btn active" data-position="bottom-right">右下</button>
+                            </div>
+                        </div>
+                        <div class="form-group" id="watermarkColorGroup">
+                            <label for="watermarkColor">水印颜色</label>
+                            <input type="color" id="watermarkColor" value="#ffffff">
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- 右侧预览区 -->
+            <main class="preview-panel">
+                <h2>预览</h2>
+                <div id="previewContainer" class="preview-container">
+                    <p class="placeholder-text">请先上传图片</p>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>© 2023 图片字幕与水印生成器 v1.0</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
